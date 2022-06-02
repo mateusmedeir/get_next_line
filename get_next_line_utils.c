@@ -53,3 +53,9 @@ char	*cat_res(char *tmp)
 	return (pointer);
 	}
 }
+
+char	*join_strings(char *res, char *tmp)
+{
+	if (!res)
+		return(put_the_line(tmp));
+}
