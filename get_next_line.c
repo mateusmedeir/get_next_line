@@ -1,39 +1,14 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
+#include "get_next_line.h"
 
 char *get_next_line(int fd)
 {
-	char	*new;
-	char	*tmp;
-	size_t	buf;
+	int			counter;
+	char		*new;
+	static char	tmp[BUFFER_SIZE + 1];
 
-	buf = BUFFER_SIZE;
-	new = malloc ((buf) * sizeof (*new));
-	if (!new)
-		return (NULL);
-	read (fd, new, buf - 1);
-	if (!new)
-		return (NULL);
-	new[buf - 1] = '\0';
+	new = NULL;
+	counter = read (fd, tmp, BUFFER_SIZE);
+	tmp[counter] = '\0';
+	new = put_the_line(tmp);
 	return (new);
-}
-
-int	main (void)
-{
-	int fd;
-	char	*new;
-
-	printf ("%d\n", BUFFER_SIZE);
-	fd = open("myfile.txt", O_CREAT | O_WRONLY, 0600);
-	if (fd == -1)
-		return (0);
-	write(fd, "Hello World\nHello Everyone\n", BUFFER_SIZE);
-	close (fd);
-	fd = open("myfile.txt", O_RDONLY);
-	if (fd == -1)
-		return (0);
-	new = get_next_line(fd);
-	printf("%s", new);
 }
