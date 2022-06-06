@@ -2,13 +2,16 @@
 
 char *get_next_line(int fd)
 {
-	int			counter;
+	int		counter;
 	char		*new;
-	static char	tmp[BUFFER_SIZE + 1];
+	char		*tmp;
+	static char	*res;
 
-	new = NULL;
+	tmp = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	counter = read (fd, tmp, BUFFER_SIZE);
 	tmp[counter] = '\0';
-	new = put_the_line(tmp);
+	counter = find_next_line(tmp);
+	new = join_strings(res, tmp);
+	res = cat_res(tmp, res);
 	return (new);
 }

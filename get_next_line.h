@@ -8,7 +8,8 @@
 
 char *get_next_line(int fd);
 char *put_the_line(char *tmp);
-char    *cat_res(char *tmp);
+char    *cat_res(char *tmp, char *res);
 char    *join_strings(char *res, char *tmp);
+int     find_next_line(char *tmp);
 
 #endif

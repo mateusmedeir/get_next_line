@@ -30,14 +30,25 @@ char	*put_the_line(char *tmp)
 	return (new);
 }
 
-char	*cat_res(char *tmp)
+int	find_next_line(char *tmp)
 {
-	char	*res;
+	while (*tmp)
+	{
+		if (*tmp == '\n')
+			return (0);
+		tmp++;
+	}
+	return (1);
+}
+
+char	*cat_res(char *tmp, char *res)
+{
 	char	*pointer;
 	int	counter;
 
 	counter = count_line(tmp);
-	res = NULL;
+	if (res)
+		free(res);
 	if (tmp[counter] == '\n' && tmp[counter + 1])
 	{
 		res = malloc((++counter) * sizeof(char));
@@ -50,12 +61,40 @@ char	*cat_res(char *tmp)
 			res++;
 			counter++;
 		}
-	return (pointer);
+		if (tmp[counter] == '\n')
+			return (NULL);
 	}
+	return (pointer);
 }
 
 char	*join_strings(char *res, char *tmp)
 {
+	char	*new;
+	int	counter;
+
 	if (!res)
 		return(put_the_line(tmp));
+	counter = 0;
+	new = malloc ((count_line(res) + count_line(tmp) + 1));
+	if (!new)
+		return (NULL);
+	while (*res)
+	{
+		new[counter] = *res;
+		res++;
+		counter++;
+	}
+	if(*res != '\n')
+	{
+		while (*tmp && *tmp != '\n')
+		{
+			new[counter] = *tmp;
+			counter++;
+			tmp++;
+		}
+	}
+	if (*tmp == '\n' || *res == '\n')
+		new[counter++] = '\n';
+	new[counter] = '\0';
+	return(new);
 }
