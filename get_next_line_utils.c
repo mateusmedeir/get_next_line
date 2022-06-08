@@ -46,11 +46,12 @@ char	*put_the_line(char *s)
 	if (!new)
 		return (NULL);
 	counter = 0;
-	while (counter <= size)
+	while (counter < size)
 	{
 		new[counter] = s[counter];
 		counter++;
 	}
+	
 	new[counter] = '\0';
 	return (new);
 }
