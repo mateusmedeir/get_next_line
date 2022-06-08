@@ -11,7 +11,7 @@ int main (void)
     if (fd < 0)
 	    return (0);
 	printf("|%s|", get_next_line(fd));
-	while (i++ < 11)
+	while (i++ < 8)
 		printf("%s|", get_next_line(fd));
 	close(fd);
 }

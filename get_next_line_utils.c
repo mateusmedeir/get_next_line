@@ -1,5 +1,15 @@
 #include "get_next_line.h"
 
+size_t  ft_strlen(const char *s)
+{
+    size_t  counter;
+
+    counter = 0;
+    while (s[counter] != '\0')
+        counter++;
+    return (counter);
+}
+
 int find_next_line(char *s)
 {
 	if (!s)
@@ -17,51 +27,52 @@ int	count_line(char *s)
 {
 	int	counter;
 
+	if (!s)
+		return (0);
 	counter = 0;
-	while (s[counter] && s[counter] != '\n')
+	while (s[counter] != '\n' && s[counter])
 		counter++;
 	return (counter);
 }
 
-char	*put_the_line(char *tmp)
+char	*put_the_line(char *s)
 {
 	int		counter;
 	int		size;
 	char	*new;
 
-	size = count_line(tmp);
+	size = count_line(s);
 	new = malloc (size + 1);
 	if (!new)
 		return (NULL);
 	counter = 0;
 	while (counter <= size)
 	{
-		new[counter] = tmp[counter];
+		new[counter] = s[counter];
 		counter++;
 	}
 	new[counter] = '\0';
 	return (new);
 }
 
-char	*cat_res(char *tmp, char *res)
+char	*cat_res(char *res)
 {
-	char	*pointer;
+	char	*new;
 	int	counter;
 
-	if (res)
-		free(res);
-	counter = count_line(tmp);
-	pointer = NULL;
-	if (tmp[counter] == '\n' && tmp[counter + 1])
+	if (!res)
+		return (NULL);
+	new = malloc(ft_strlen(res) + 1);
+	if (!new)
+		return (NULL);
+	counter = 0;
+	while (res[counter])
 	{
-		res = malloc(++counter);
-		if (!res)
-			return (NULL);
-		pointer = res;
-		while (tmp[counter])
-			*res++ = tmp[counter++];
+		new[counter] = res[counter];
+		counter++;
 	}
-	return (pointer);
+	new[counter] = '\0';
+	return (new);
 }
 
 char	*join_strings(char *res, char *tmp)
@@ -69,26 +80,25 @@ char	*join_strings(char *res, char *tmp)
 	char	*new;
 	int	counter;
 
-	if (!res)
-		return(put_the_line(tmp));
 	counter = 0;
-	new = malloc ((count_line(res) + count_line(tmp) + 1));
+	new = malloc ((count_line(res) + ft_strlen(tmp) + 1));
 	if (!new)
 		return (NULL);
-	while (*res)
+	if (res)
 	{
-		new[counter] = *res;
-		res++;
-		counter++;
+		while (*res)
+		{
+			new[counter] = *res;
+			res++;
+			counter++;
+		}
 	}
-	while (*tmp && *tmp != '\n')
+	while (*tmp)
 	{
 		new[counter] = *tmp;
 		counter++;
 		tmp++;
 	}
-	if (*tmp == '\n')
-		new[counter++] = '\n';
 	new[counter] = '\0';
 	return(new);
 }

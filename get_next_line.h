@@ -6,11 +6,12 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char *get_next_line(int fd);
-char *put_the_line(char *tmp);
-int count_line(char *s);
-char    *cat_res(char *tmp, char *res);
-char    *join_strings(char *res, char *tmp);
-int     find_next_line(char *s);
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+int		find_next_line(char *s);
+int		count_line(char *s);
+char	*put_the_line(char *s);
+char	*cat_res(char *res);
+char	*join_strings(char *res, char *tmp);
 
 #endif
