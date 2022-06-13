@@ -11,8 +11,7 @@ char *get_next_line(int fd)
 	if (find_next_line(res))
 	{
 		new = put_the_line(res);
-		res = cat_res(res + (count_line(res + 1) + 2));
-		printf("\nRES: %s\n", res);
+		res = cat_res(res);
 		return (new);
 	}
 	counter = 1;
@@ -21,12 +20,14 @@ char *get_next_line(int fd)
 		tmp = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		counter = read (fd, tmp, BUFFER_SIZE);
 		if (counter == -1)
-			return (NULL);
+			break;
 		tmp[counter] = '\0';
 		res = join_strings(res, tmp);
 	}
 	free(tmp);
+	if (counter == -1)
+		return (NULL);
 	new = put_the_line(res);
-	res = cat_res(res + (count_line(res + 1) + 2));
+	res = cat_res(res);
 	return (new);
 }
