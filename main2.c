@@ -1,27 +1,9 @@
 #include "get_next_line.h"
-
-int main (void)
+#include <stdio.h>
+int	main(void)
 {
-    int     fd;
-    int     count;
-    char    *line = 0;
+	int i;
 
-    printf("\n==========================================\n");
-    printf("============== BIG ALPHABET ==============\n");
-    printf("==========================================\n\n");
-
-    count = 0;
-    if (!(fd = open("bigalphabet.txt", O_RDONLY)))
-    {
-        printf("\nError in open\n");
-        return (0);
-    }
-    while (1)
-    {
-        line = get_next_line(fd);
-        if (!*line)
-            break;
-        count++;
-        printf("|%s", line);
-    }
+	i = open("empty", O_RDONLY);
+	printf("%d\n", i);
 }

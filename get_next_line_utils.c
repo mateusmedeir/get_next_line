@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/14 12:49:39 by mmedeiro          #+#    #+#             */
+/*   Updated: 2022/06/14 12:50:01 by mmedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t  ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-    size_t  counter;
+	size_t	counter;
 
 	if (!s)
-		return(0);
-    counter = 0;
-    while (s[counter] != '\0')
-        counter++;
-    return (counter);
+		return (0);
+	counter = 0;
+	while (s[counter] != '\0')
+		counter++;
+	return (counter);
 }
 
-int find_next_line(char *s)
+int	find_next_line(char *s)
 {
 	if (!s)
 		return (0);
-    while (*s)
-    {
-        if (*s == '\n')
-            return (1);
-        s++;
-    }
-    return (0);
+	while (*s)
+	{
+		if (*s == '\n')
+			return (1);
+		s++;
+	}
+	return (0);
 }
 
 char	*put_the_line(char *s)
@@ -50,8 +62,8 @@ char	*put_the_line(char *s)
 char	*cat_res(char *res)
 {
 	char	*new;
-	int	counter;
-	int	size;
+	int		counter;
+	int		size;
 
 	size = 0;
 	while (res[size] && res[size] != '\n')
@@ -76,7 +88,7 @@ char	*cat_res(char *res)
 char	*join_strings(char *res, char *tmp)
 {
 	char	*new;
-	int	counter;
+	int		counter;
 
 	counter = 0;
 	new = malloc ((ft_strlen(res) + ft_strlen(tmp) + 1));
@@ -98,5 +110,5 @@ char	*join_strings(char *res, char *tmp)
 		tmp++;
 	}
 	new[counter] = '\0';
-	return(new);
+	return (new);
 }
