@@ -1,4 +1,4 @@
-<h1 align="center">get-next-line</h1>
+<h1 align="center">get_next_line - 42cursus</h1>
 <p align="center">Reading a line from a fd is way too tedious</p>
 
 ## 📑 About
