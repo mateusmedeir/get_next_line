@@ -3,5 +3,10 @@
 
 ## 📑 About
 ---
-> This project is about programming a function that returns a line read from a file descriptor.
+> This project is about programming a function that returns a line read from a file descriptor. This project make me learn a very interesting new concept in C programming: static variables.
 ---
+
+### Used functions
+
+| Name                                  | Description                                                                                                                 |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
