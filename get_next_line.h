@@ -6,7 +6,7 @@
 /*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:52:49 by mmedeiro          #+#    #+#             */
-/*   Updated: 2022/06/14 12:52:55 by mmedeiro         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:38:38 by mmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
 
 char	*get_next_line(int fd);
+char	*read_file(int fd);
 size_t	ft_strlen(const char *s);
 int		find_next_line(char *s);
 int		count_line(char *s);

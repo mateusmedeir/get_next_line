@@ -6,7 +6,7 @@
 /*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:49:39 by mmedeiro          #+#    #+#             */
-/*   Updated: 2022/06/14 12:50:01 by mmedeiro         ###   ########.fr       */
+/*   Updated: 2022/06/15 18:20:27 by mmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ char	*put_the_line(char *s)
 	if (!new)
 		return (NULL);
 	counter = 0;
-	while (counter <= size)
+	while (counter < size)
 	{
 		new[counter] = s[counter];
 		counter++;
 	}
+	if (s[counter] == '\n')
+		new[counter++] = '\n';
 	new[counter] = '\0';
 	return (new);
 }
@@ -69,7 +71,10 @@ char	*cat_res(char *res)
 	while (res[size] && res[size] != '\n')
 		size++;
 	if (!res[size])
+	{
+		free(res);
 		return (NULL);
+	}
 	size++;
 	new = malloc(ft_strlen(res) - size + 1);
 	if (!new)
@@ -91,24 +96,25 @@ char	*join_strings(char *res, char *tmp)
 	int		counter;
 
 	counter = 0;
-	new = malloc ((ft_strlen(res) + ft_strlen(tmp) + 1));
+	new = malloc (ft_strlen(res) + ft_strlen(tmp) + 1);
 	if (!new)
 		return (NULL);
 	if (res)
 	{
-		while (*res)
+		while (res[counter])
 		{
-			new[counter] = *res;
-			res++;
+			new[counter] = res[counter];
 			counter++;
 		}
+		free(res);
 	}
 	while (*tmp)
-	{
-		new[counter] = *tmp;
-		counter++;
-		tmp++;
-	}
+		new[counter++] = *tmp++;
 	new[counter] = '\0';
+	if (!*new)
+	{
+		free(new);
+		return (NULL);
+	}
 	return (new);
 }

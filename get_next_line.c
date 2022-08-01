@@ -6,7 +6,7 @@
 /*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:45:45 by mmedeiro          #+#    #+#             */
-/*   Updated: 2022/06/14 12:59:19 by mmedeiro         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:34:42 by mmedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,34 @@
 
 char	*get_next_line(int fd)
 {
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	return (read_file(fd));
+}
+
+char	*read_file(int fd)
+{
 	int			counter;
 	char		*new;
 	static char	*res;
 
+	new = malloc(BUFFER_SIZE + 1);
+	if (!new)
+		return (NULL);
 	counter = 1;
 	while (counter > 0 && find_next_line(res) != 1)
 	{
-		new = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		counter = read (fd, new, BUFFER_SIZE);
-		if (counter == -1)
-			break ;
+		if (counter < 0)
+		{
+			free(new);
+			return (NULL);
+		}
 		new[counter] = '\0';
 		res = join_strings(res, new);
-		free(new);
 	}
-	if (counter == -1)
+	free(new);
+	if (!res)
 		return (NULL);
 	new = put_the_line(res);
 	res = cat_res(res);
