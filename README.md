@@ -1,4 +1,5 @@
 <h1 align="center">get next line - 42</h1>
+<p align="center"><strong>Reading a line on a fd is way to tedious</strong></p>
 
 ## 📑 About
 ---
