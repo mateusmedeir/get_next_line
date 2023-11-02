@@ -3,67 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
+/*   By: matlopes <matlopes@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 12:49:39 by mmedeiro          #+#    #+#             */
-/*   Updated: 2022/06/15 18:20:27 by mmedeiro         ###   ########.fr       */
+/*   Created: 2023/11/02 16:56:50 by matlopes          #+#    #+#             */
+/*   Updated: 2023/11/02 17:01:30 by matlopes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *str)
 {
 	size_t	counter;
 
-	if (!s)
+	if (!str)
 		return (0);
 	counter = 0;
-	while (s[counter] != '\0')
+	while (str[counter] != '\0')
 		counter++;
 	return (counter);
 }
 
-int	find_next_line(char *s)
+int	ft_find_next_line(char *str)
 {
-	if (!s)
+	if (!str)
 		return (0);
-	while (*s)
+	while (*str)
 	{
-		if (*s == '\n')
+		if (*str == '\n')
 			return (1);
-		s++;
+		str++;
 	}
 	return (0);
 }
 
-char	*put_the_line(char *s)
+char	*ft_put_the_line(char *res)
 {
 	int		counter;
 	int		size;
-	char	*new;
+	char	*line;
 
 	size = 0;
-	while (s[size] && s[size] != '\n')
+	while (res[size] && res[size] != '\n')
 		size++;
-	new = malloc (size + 2);
-	if (!new)
+	line = malloc((size + 2) * sizeof(char));
+	if (!line)
 		return (NULL);
 	counter = 0;
 	while (counter < size)
 	{
-		new[counter] = s[counter];
+		line[counter] = res[counter];
 		counter++;
 	}
-	if (s[counter] == '\n')
-		new[counter++] = '\n';
-	new[counter] = '\0';
-	return (new);
+	if (res[counter] == '\n')
+		line[counter++] = '\n';
+	line[counter] = '\0';
+	return (line);
 }
 
-char	*cat_res(char *res)
+char	*ft_cat_res(char *res)
 {
-	char	*new;
+	char	*new_res;
 	int		counter;
 	int		size;
 
@@ -76,45 +76,45 @@ char	*cat_res(char *res)
 		return (NULL);
 	}
 	size++;
-	new = malloc(ft_strlen(res) - size + 1);
-	if (!new)
+	new_res = malloc((ft_strlen(res) - size + 1) * sizeof(char));
+	if (!new_res)
 		return (NULL);
 	counter = 0;
 	while (res[size + counter])
 	{
-		new[counter] = res[size + counter];
+		new_res[counter] = res[size + counter];
 		counter++;
 	}
-	new[counter] = '\0';
+	new_res[counter] = '\0';
 	free(res);
-	return (new);
+	return (new_res);
 }
 
-char	*join_strings(char *res, char *tmp)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*new;
+	char	*pointer;
 	int		counter;
 
 	counter = 0;
-	new = malloc (ft_strlen(res) + ft_strlen(tmp) + 1);
-	if (!new)
+	pointer = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!pointer)
 		return (NULL);
-	if (res)
+	if (s1)
 	{
-		while (res[counter])
+		while (s1[counter])
 		{
-			new[counter] = res[counter];
+			pointer[counter] = s1[counter];
 			counter++;
 		}
-		free(res);
+		free(s1);
 	}
-	while (*tmp)
-		new[counter++] = *tmp++;
-	new[counter] = '\0';
-	if (!*new)
+	while (*s2)
+		pointer[counter++] = *s2++;
+	pointer[counter] = '\0';
+	if (!*pointer)
 	{
-		free(new);
+		free(pointer);
 		return (NULL);
 	}
-	return (new);
+	return (pointer);
 }

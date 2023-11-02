@@ -3,26 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmedeiro <mmedeiro@student.42.rio>         +#+  +:+       +#+        */
+/*   By: matlopes <matlopes@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 12:52:49 by mmedeiro          #+#    #+#             */
-/*   Updated: 2022/06/20 11:38:38 by mmedeiro         ###   ########.fr       */
+/*   Created: 2023/11/02 16:54:13 by matlopes          #+#    #+#             */
+/*   Updated: 2023/11/02 16:56:41 by matlopes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
 # include <unistd.h>
 # include <stdlib.h>
 
+size_t	ft_strlen(const char *str);
+int		ft_find_next_line(char *str);
+char	*ft_put_the_line(char *res);
+char	*ft_cat_res(char *res);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_read_file(int fd);
 char	*get_next_line(int fd);
-char	*read_file(int fd);
-size_t	ft_strlen(const char *s);
-int		find_next_line(char *s);
-int		count_line(char *s);
-char	*put_the_line(char *s);
-char	*cat_res(char *res);
-char	*join_strings(char *res, char *tmp);
 
 #endif
