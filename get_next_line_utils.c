@@ -6,7 +6,7 @@
 /*   By: matlopes <matlopes@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 16:56:50 by matlopes          #+#    #+#             */
-/*   Updated: 2023/11/02 17:01:30 by matlopes         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:48:28 by matlopes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,17 @@ int	ft_find_next_line(char *str)
 char	*ft_put_the_line(char *res)
 {
 	int		counter;
+	int		check;
 	int		size;
 	char	*line;
 
 	size = 0;
+	check = 0;
 	while (res[size] && res[size] != '\n')
 		size++;
-	line = malloc((size + 2) * sizeof(char));
+	if (res[size] == '\n')
+		check++;
+	line = malloc((size + check + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
 	counter = 0;
